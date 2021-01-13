@@ -378,7 +378,12 @@ function runsocketapp(io) {
                 await query(`update matchofchess set status = ${isdraw ? 1 : 2}, winner = ${userWinId} where id = '${roomId}'`);
                 //update message
                 // let messageData = JSON.stringify(allMessageObj[roomId]);
-                await query(`insert into chat_match set content = '${messageData}', matchId = '${roomId}' `);
+                try {
+                    await query(`insert into chat_match set content = '${messageData}', matchId = '${roomId}' `);
+                } catch (error) {
+                    console.log(error);
+                }
+                
                 if (isdraw) {
                     return;
                 }

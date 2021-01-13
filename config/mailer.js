@@ -1,5 +1,15 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+// const transport = nodemailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: process.env.usermailer,
+//     pass: process.env.passmailer
+//   },
+//   tls: {
+//     rejectUnauthorized: false
+//   }
+// });
 const transport = nodemailer.createTransport({
   host: 'smtp.zoho.com',
     port: 465,

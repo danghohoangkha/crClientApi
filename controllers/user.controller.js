@@ -19,7 +19,9 @@ exports.getHistoryMatch = async (req, res, next) => {
 exports.getUserWithId = async(req, res, next)=>{
   try {
     let user = await query(`select * from users where id = ${req.params.id}`);
-    res.status(200).json(user[0]);
+    user = user[0];
+    user["rating"] = Math.round(user.winMatch/(user.winMatch + user.drawMatch + user.loseMatch) * 100);
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({message: "loi"})
   }

@@ -42,8 +42,7 @@ module.exports.signup = async function (req, res, next) {
       return res.status(200).json({ message: "Email is exist!" });
     }
   } catch (error) {
-console.log(error)
-    res.status(200).json({ message: error });
+    res.status(200).json({ message: "error" });
   }
 };
 
