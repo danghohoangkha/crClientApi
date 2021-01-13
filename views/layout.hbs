@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  {{{body}}}
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.on('connect', function () {
+      console.log("ket noi")
+    });
+    socket.on('event', function (data) { });
+    socket.on('disconnect', function () { });
+  </script>
+</body>
+
+</html>
