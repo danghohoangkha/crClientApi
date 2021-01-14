@@ -424,13 +424,13 @@ function runsocketapp(io) {
                 isDraw = true;
             }
             if (isDraw) {
-                socket.emit("DrawloseWin", "Hai nguoi choi hoa");
+                io.to(roomId).emit("DrawloseWin", "Hai nguoi choi hoa");
             } else {
                 let userlose = await query(`select * from users where id = ${loseId}`)
                 userlose = userlose[0]
                 let userWin = await query(`select * from users where id = ${winnerId}`)
                 userWin = userWin[0]
-                socket.emit("DrawloseWin", `Thắng là: ${userWin.fullName}, Thua là: ${userlose.fullName}`);
+                io.to(roomId).emit("DrawloseWin", `Thắng là: ${userWin.fullName}, Thua là: ${userlose.fullName}`);
             }
             let messageData = JSON.stringify(allMessageObj[roomId]);
             delete chessPlayerList[roomId]
