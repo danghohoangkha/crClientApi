@@ -12,7 +12,9 @@ module.exports.getUser = async function (req, res, next) {
   try {
     //let user = await query(`select * from users where id = ${req.userId}`);
     //user = user[0];
-    res.status(200).send(req.user)
+    let user = req.user;
+    user["rating"] = Math.round(user.winMatch/(user.winMatch + user.drawMatch + user.loseMatch) * 100);
+    res.status(200).send(user)
   } catch (error) {
     res.status(500).send({ message: "loi lay user" })
   }
