@@ -367,7 +367,7 @@ function runsocketapp(io) {
             //update message
             let messageData = JSON.stringify(allMessageObj[roomId]);
             //await query(`insert into chat_match set content = '${messageData}', matchId = '${roomId}' `);
-            saveDatabaseAfterMatch(true, null, null, messageData, roomId)
+            saveDatabaseAfterMatch(true, userId, null, messageData, roomId)
             io.to(roomId).emit("DrawloseWin", "Trận chiến hòa");
         })
 
@@ -385,6 +385,14 @@ function runsocketapp(io) {
                 }
                 
                 if (isdraw) {
+                    try {
+                        let userWin = await query(`select * from users where id = ${userWinId}`)
+                        userWin = userWin[0]
+                        userWin.drawMatch = userWin.drawMatch + 1;
+                        await query(`update users set drawMatch = ${userWin.drawMatch} where id = ${userWin.id}  `)
+                    } catch (error) {
+
+                    }
                     return;
                 }
                 let userlose = await query(`select * from users where id = ${userloseId}`)
